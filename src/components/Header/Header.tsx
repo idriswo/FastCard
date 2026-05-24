@@ -5,7 +5,7 @@ import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/authSlice'; 
 import { toggleTheme } from '../../store/themeSlice';
-import { type RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { Search, Heart, ShoppingCart, User, LogOut, Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import Logo from "../../assets/Group 1116606595.png";
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ const Header = memo(() => {
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const wishlistCount = wishlistItems.length;
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const isDarkMode = useSelector((state: any) => state.theme?.isDarkMode);
+  const isDarkMode = useSelector((state: RootState) => state.theme?.isDarkMode);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {

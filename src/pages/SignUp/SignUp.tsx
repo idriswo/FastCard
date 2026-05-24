@@ -46,8 +46,9 @@ const SignUp = memo(() => {
         
         console.log(response.data);
         navigate('/login'); 
-      } catch (error: any) {
-        console.error(error);
+      } catch (err: unknown) {
+        console.error(err);
+        const error = err as { response?: { data?: { errors?: string[] | Record<string, string[]>, message?: string } }, message?: string };
         const errorMessage = error.response?.data?.errors 
           ? Object.values(error.response.data.errors).flat().join("\n")
           : t('auth.signupErrorDefault', "An error occurred during registration.");

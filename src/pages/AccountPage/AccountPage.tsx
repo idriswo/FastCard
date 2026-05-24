@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { memo, useState } from "react";
 import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -8,8 +9,8 @@ import { useTranslation } from "react-i18next";
 
 const AccountPage = memo(() => {
   const { t } = useTranslation();
-  const { user } = useSelector((state: any) => state.auth);
-  const orders = useSelector((state: any) => state.orders.orders || []);
+  const { user } = useSelector((state: RootState) => state.auth);
+  const orders = useSelector((state: RootState) => state.orders.orders || []);
   const [activeTab, setActiveTab] = useState<'profile' | 'orders'>('profile');
 
   const formik = useFormik({
@@ -252,7 +253,7 @@ const AccountPage = memo(() => {
                   </NavLink>
                 </div>
               ) : (
-                orders.map((order: any) => (
+                orders.map((order) => (
                   <div key={order.id} className="bg-white dark:bg-zinc-900 rounded-sm shadow-[0_1px_10px_rgba(0,0,0,0.05)] border border-zinc-100 dark:border-zinc-800 overflow-hidden">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[12px] px-[24px] py-[16px] border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-[12px] sm:gap-[24px]">
@@ -279,7 +280,7 @@ const AccountPage = memo(() => {
                     </div>
 
                     <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
-                      {order.items.map((item: any) => {
+                      {order.items.map((item) => {
                         const price = item.hasDiscount ? item.discountPrice : item.price;
                         return (
                           <div key={item.id} className="flex items-center gap-[16px] px-[24px] py-[16px]">

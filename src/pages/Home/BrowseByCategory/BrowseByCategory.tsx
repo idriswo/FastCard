@@ -30,6 +30,19 @@ interface Category {
   categoryImage: string | null;
 }
 
+interface Product {
+  id: string | number;
+  productName: string;
+  price: number;
+  discountPrice: number;
+  hasDiscount: boolean;
+  image: string;
+  description?: string;
+  reviews?: number;
+  rating?: number;
+  quantity?: number;
+}
+
 
 const getCategoryIcon = (categoryName: string) => {
   const iconMap: { [key: string]: React.ReactNode } = {
@@ -57,7 +70,7 @@ const BrowseByCategory = memo(({ onSelectCategory, selectedCategoryId }: BrowseB
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
 
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [productsLoading, setProductsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -67,12 +80,12 @@ const BrowseByCategory = memo(({ onSelectCategory, selectedCategoryId }: BrowseB
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
-  const handleWishlist = (e: React.MouseEvent, product: any) => {
+  const handleWishlist = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(toggleWishlist(product));
   };
 
-  const handleAddToCart = (e: React.MouseEvent, product: any) => {
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(addToCart(product));
   };
@@ -90,9 +103,10 @@ const BrowseByCategory = memo(({ onSelectCategory, selectedCategoryId }: BrowseB
         } else {
           throw new Error(response.data?.message || 'Категории не найдены');
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error('Ошибка при загрузке категорий:', err);
-        setError(err.response?.data?.message || err.message || 'Ошибка сервера');
+        const error = err as { response?: { data?: { message?: string } }, message?: string };
+        setError(error.response?.data?.message || error.message || 'Ошибка сервера');
       } finally {
         setCategoriesLoading(false);
       }
@@ -126,7 +140,7 @@ const BrowseByCategory = memo(({ onSelectCategory, selectedCategoryId }: BrowseB
     fetchProductsByCategory();
   }, [selectedCategoryId]);
 
-  const renderProductCard = (product: any) => {
+  const renderProductCard = (product: Product) => {
     const discountPercent = product.hasDiscount && product.discountPrice < product.price
       ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
       : 0;

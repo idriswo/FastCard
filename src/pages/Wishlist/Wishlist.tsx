@@ -9,14 +9,14 @@ import { Trash2, Eye } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface Product {
-  id: number;
+  id: number | string;
   productName: string;
   price: number;
   discountPrice: number;
   hasDiscount: boolean;
-  quantity: number;
+  quantity?: number;
   image: string;
-  rating: number;
+  rating?: number;
   categoryId?: number;
   brandId?: number;
 }
@@ -47,17 +47,17 @@ const WishlistPage = memo(() => {
     fetchJustForYou();
   }, []);
 
-  const handleRemove = (e: React.MouseEvent, product: any) => {
+  const handleRemove = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(toggleWishlist(product));
   };
 
-  const handleAddToCart = (e: React.MouseEvent, product: any) => {
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(addToCart(product));
   };
 
-  const renderProduct = (product: any, isWishlist: boolean) => {
+  const renderProduct = (product: Product, isWishlist: boolean) => {
     const discountPercent = product.hasDiscount && product.discountPrice < product.price
       ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
       : 0;

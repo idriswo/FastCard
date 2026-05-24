@@ -6,9 +6,10 @@ import 'aos/dist/aos.css';
 import Layout from "./Layout/Layout";
 import { Home,Contact,About,Login,SignUp, AccountPage, NotFound, ProductDetail, ProductsPage, Wishlist, Cart, CheckOut } from "./Router/Router";
 import { Toaster } from "react-hot-toast";
+import type { RootState } from './store/store';
 
 const App = memo(() => {
-  const isDarkMode = useSelector((state: any) => state.theme?.isDarkMode);
+  const isDarkMode = useSelector((state: RootState) => state.theme?.isDarkMode);
 
   useEffect(() => {
     if (isDarkMode) {

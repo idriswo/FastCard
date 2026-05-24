@@ -38,10 +38,13 @@ const Login = memo(() => {
           console.warn("Токен аз сервер ёфт нашуд!");
         }
         navigate("/");
-      } catch (error: any) {
-        console.log(error);
+      } catch (err: unknown) {
+        console.log(err);
+        const error = err as { response?: { data?: { errors?: string[] | Record<string, string[]>, message?: string } }, message?: string };
         const errorMessage = error.response?.data?.errors
-          ? error.response.data.errors.join("\n")
+          ? (Array.isArray(error.response.data.errors) 
+              ? error.response.data.errors.join("\n") 
+              : Object.values(error.response.data.errors).flat().join("\n"))
           : t('auth.invalidLogin', 'Invalid login or password.');
         toast.error(t('auth.loginError', 'Login error: ') + errorMessage, { style: { background: '#333', color: '#fff' } });
       }

@@ -36,12 +36,12 @@ const SecFlashSales = memo(() => {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
-  const handleWishlist = (e: React.MouseEvent, product: any) => {
+  const handleWishlist = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(toggleWishlist(product));
   };
 
-  const handleAddToCart = (e: React.MouseEvent, product: any) => {
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(addToCart(product));
   };
@@ -147,14 +147,16 @@ const SecFlashSales = memo(() => {
         } else {
           throw new Error(response.data?.message || 'Данные не найдены');
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Ошибка при загрузке товаров:", err);
-        setError(err.response?.data?.message || err.message || "Ошибка сервера");
+        const error = err as { response?: { data?: { message?: string } }, message?: string };
+        setError(error.response?.data?.message || error.message || "Ошибка сервера");
       } finally {
         setLoading(false);
         setTimeout(() => {
           import('aos').then((AOS) => {
-            AOS.default.refresh();
+            const aosInstance = AOS.default || AOS;
+            if (aosInstance?.refresh) aosInstance.refresh();
           });
         }, 100);
       }

@@ -8,7 +8,9 @@ export interface CartItem {
   hasDiscount: boolean;
   image: string;
   quantity: number; // The user's requested quantity in cart
-  stockQuantity: number; // The actual stock available for the product
+  stockQuantity?: number; // The actual stock available for the product
+  rating?: number;
+  description?: string;
 }
 
 interface CartState {

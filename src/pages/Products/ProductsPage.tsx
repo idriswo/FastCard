@@ -39,12 +39,12 @@ const ProductsPage = memo(() => {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
-  const handleWishlist = (e: React.MouseEvent, product: any) => {
+  const handleWishlist = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(toggleWishlist(product));
   };
 
-  const handleAddToCart = (e: React.MouseEvent, product: any) => {
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     dispatch(addToCart(product));
   };

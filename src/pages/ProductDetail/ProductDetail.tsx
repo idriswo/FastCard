@@ -34,14 +34,14 @@ const ProductDetail = memo(() => {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
-  const handleWishlist = (e: React.MouseEvent, productToToggle: any) => {
+  const handleWishlist = (e: React.MouseEvent, productToToggle: ProductData) => {
     e.preventDefault();
     dispatch(toggleWishlist(productToToggle));
   };
   
   const [quantity, setQuantity] = useState(1);
 
-  const handleAddToCart = (e: React.MouseEvent, productToToggle: any, qty: number = 1) => {
+  const handleAddToCart = (e: React.MouseEvent, productToToggle: ProductData, qty: number = 1) => {
     e.preventDefault();
     dispatch(addToCart({ ...productToToggle, addQty: qty }));
   };
@@ -72,9 +72,10 @@ const ProductDetail = memo(() => {
         } else {
           throw new Error(response.data?.message || 'Product not found');
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Error loading product:", err);
-        setError(err.response?.data?.message || err.message || "Server Error");
+        const error = err as { response?: { data?: { message?: string } }, message?: string };
+        setError(error.response?.data?.message || error.message || "Server Error");
       } finally {
         setLoading(false);
       }
@@ -92,7 +93,7 @@ const ProductDetail = memo(() => {
         const response = await axiosRequest.get("/Product/get-products");
         if (response.data?.statusCode === 200) {
           const allProducts = response.data.data?.products || [];
-          const filtered = allProducts.filter((p: any) => p.id !== Number(id)).slice(0, 4);
+          const filtered = allProducts.filter((p: ProductData) => p.id !== Number(id)).slice(0, 4);
           setRelatedProducts(filtered);
         }
       } catch (err) {

@@ -1,16 +1,17 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface WishlistProduct {
-  id: number;
+  id: number | string;
   productName: string;
   price: number;
   discountPrice: number;
   hasDiscount: boolean;
-  quantity: number;
+  quantity?: number;
   image: string;
-  rating: number;
+  rating?: number;
   categoryId?: number;
   brandId?: number;
+  description?: string;
 }
 
 interface WishlistState {

@@ -63,9 +63,10 @@ const CategorySidebar = memo(
             response.data?.message || "Категории не найдены"
           );
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Ошибка при загрузке категорий:", err);
-        setError(err.response?.data?.message || err.message || "Ошибка");
+        const error = err as { response?: { data?: { message?: string } }, message?: string };
+        setError(error.response?.data?.message || error.message || "Ошибка");
       } finally {
         setLoading(false);
       }
