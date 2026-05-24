@@ -14,7 +14,7 @@ const Homepage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
 
   return (
-    <div className="w-full max-w-[1400px] mx-auto px-[16px] md:px-[32px] font-sans">
+    <div className="w-full max-w-[1400px] mx-auto px-[16px] md:px-[32px] font-sans overflow-x-hidden">
 
       <div className="flex flex-col md:flex-row gap-[40px] mb-[60px]">
         <div data-aos="fade-right" data-aos-duration="800">

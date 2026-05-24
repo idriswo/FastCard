@@ -210,6 +210,37 @@ const Header = memo(() => {
             <NavLink to="/contact" onClick={() => setIsOpen(false)} className={mobileLinkStyles}>{t('header.contact')}</NavLink>
             <NavLink to="/about" onClick={() => setIsOpen(false)} className={mobileLinkStyles}>{t('header.about')}</NavLink>
             
+            <Separator className="bg-zinc-100 dark:bg-zinc-800 my-2" />
+
+            {/* Mobile Actions: Wishlist, Theme, Language */}
+            <div className="flex items-center justify-between py-2">
+              <NavLink to="/wishlist" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-zinc-900 dark:text-white font-medium hover:text-red-500 transition-colors">
+                <div className="relative">
+                  <Heart className="w-5 h-5" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+                      {wishlistCount}
+                    </span>
+                  )}
+                </div>
+                <span>{t('header.wishlist', 'Wishlist')}</span>
+              </NavLink>
+
+              <button onClick={() => dispatch(toggleTheme())} className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white">
+                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-2 mt-2 mb-2">
+              <span className="text-[13px] text-zinc-500 dark:text-zinc-400 font-medium uppercase">{t('header.language', 'Language')}</span>
+              <div className="flex gap-2">
+                <button onClick={() => { i18n.changeLanguage('en'); setIsOpen(false); }} className={`flex-1 py-2 rounded-md text-sm font-medium transition-colors ${i18n.language === 'en' ? 'bg-red-50 text-red-500 dark:bg-red-500/10' : 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white'}`}>EN</button>
+                <button onClick={() => { i18n.changeLanguage('ru'); setIsOpen(false); }} className={`flex-1 py-2 rounded-md text-sm font-medium transition-colors ${i18n.language === 'ru' ? 'bg-red-50 text-red-500 dark:bg-red-500/10' : 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white'}`}>RU</button>
+                <button onClick={() => { i18n.changeLanguage('tj'); setIsOpen(false); }} className={`flex-1 py-2 rounded-md text-sm font-medium transition-colors ${i18n.language === 'tj' ? 'bg-red-50 text-red-500 dark:bg-red-500/10' : 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white'}`}>TJ</button>
+              </div>
+            </div>
+
+            <Separator className="bg-zinc-100 dark:bg-zinc-800 my-2" />
             {!isAuthenticated ? (
               <NavLink to="/signup" onClick={() => setIsOpen(false)} className="py-2 text-[15px] font-semibold text-zinc-900 dark:text-white hover:pl-2 transition-all duration-200">{t('header.signup')}</NavLink>
             ) : (
