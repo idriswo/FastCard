@@ -1,0 +1,17 @@
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet } from 'react-router-dom';
+import type { RootState } from '../store/store';
+
+/**
+ * ProtectedRoute — пропускает только авторизованных пользователей.
+ * Если пользователь не вошёл, перенаправляет на /login.
+ */
+const ProtectedRoute = () => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+};
+
+export default ProtectedRoute;
