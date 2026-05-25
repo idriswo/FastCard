@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {type RootState } from "../../store/store";
 import { toggleWishlist } from "../../store/wishlistSlice";
@@ -25,8 +25,6 @@ const WishlistPage = memo(() => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const navigate = useNavigate();
   
   const [justForYou, setJustForYou] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,10 +54,6 @@ const WishlistPage = memo(() => {
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
     dispatch(addToCart(product));
   };
 

@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from 'react';
 import { axiosRequest } from '../../../utils/token';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleWishlist } from '../../../store/wishlistSlice';
 import { addToCart } from '../../../store/cartSlice';
@@ -35,8 +35,6 @@ const SecFlashSales = memo(() => {
   
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const navigate = useNavigate();
 
   const handleWishlist = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
@@ -45,10 +43,6 @@ const SecFlashSales = memo(() => {
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
     dispatch(addToCart(product));
   };
 

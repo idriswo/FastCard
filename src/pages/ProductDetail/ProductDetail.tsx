@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { axiosRequest } from '../../utils/token';
 import { Truck, RefreshCcw, Heart, Minus, Plus } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,8 +33,6 @@ const ProductDetail = memo(() => {
   
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const navigate = useNavigate();
 
   const handleWishlist = (e: React.MouseEvent, productToToggle: ProductData) => {
     e.preventDefault();
@@ -45,10 +43,6 @@ const ProductDetail = memo(() => {
 
   const handleAddToCart = (e: React.MouseEvent, productToToggle: ProductData, qty: number = 1) => {
     e.preventDefault();
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
     dispatch(addToCart({ ...productToToggle, addQty: qty }));
   };
   const [selectedSize, setSelectedSize] = useState<string>('');

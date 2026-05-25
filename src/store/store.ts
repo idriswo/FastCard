@@ -9,7 +9,7 @@ import i18n from '../i18n';
 
 const authMiddleware: Middleware = storeAPI => next => action => {
   const act = action as { type: string };
-  if (act.type === 'cart/addToCart' || act.type === 'wishlist/toggleWishlist') {
+  if (act.type === 'cart/addToCart') {
     const state = storeAPI.getState() as any;
     if (!state.auth.isAuthenticated) {
       toast.error(i18n.t('auth.pleaseLogin', 'Аввал ба система ворид шавед!'), { style: { background: '#333', color: '#fff' } });
