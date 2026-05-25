@@ -1,14 +1,15 @@
 import { memo, useState, useRef, useEffect } from 'react';
-import { Input } from "../../components/ui/input";
+
 import { Separator } from "../../components/ui/separator";
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/authSlice'; 
 import { toggleTheme } from '../../store/themeSlice';
 import type { RootState } from '../../store/store';
-import { Search, Heart, ShoppingCart, User, LogOut, Menu, X, Sun, Moon, Globe } from 'lucide-react';
+import { Heart, ShoppingCart, User, LogOut, Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import Logo from "../../assets/Group 1116606595.png";
 import { useTranslation } from 'react-i18next';
+import SearchAutocomplete from './SearchAutocomplete';
 
 const Header = memo(() => {
   const { t, i18n } = useTranslation();
@@ -54,11 +55,7 @@ const Header = memo(() => {
 
   const mobileLinkStyles = "py-2 border-b border-zinc-100 text-[15px] font-medium hover:pl-2 transition-all duration-200";
 
-  const searchInputClasses = `
-    w-full pl-[16px] pr-[40px] py-[8.5px] text-[13px] rounded-lg border border-zinc-200 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white outline-none placeholder:text-zinc-400 dark:text-zinc-500 
-    transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)]
-    focus:bg-white dark:bg-zinc-900 focus:border-zinc-900 focus:shadow-[0_0_0_4px_rgba(24,24,27,0.05)]
-  `;
+
 
   return (
     <div className="dark:bg-zinc-950  sticky top-0 z-50 w-full bg-white  text-zinc-900 dark:text-white font-sans max-w-[1560px] m-auto">
@@ -93,12 +90,7 @@ const Header = memo(() => {
 
           <div className="flex items-center gap-[16px] md:gap-[24px]">
             
-            <div className="relative hidden md:block flex-grow max-w-[280px] group">
-              <Input type="text" placeholder={t('header.searchPlaceholder')} className={searchInputClasses} />
-              <div className="absolute top-1/2 right-[12px] -translate-y-1/2 flex items-center justify-center w-6 h-6 rounded-md transition-colors duration-200 group-focus-within:bg-zinc-100 dark:bg-zinc-800">
-                <Search className="w-4 h-4 text-zinc-400 dark:text-zinc-500 transition-colors duration-300 group-focus-within:text-zinc-900 dark:text-white cursor-pointer" />
-              </div>
-            </div>
+            <SearchAutocomplete />
 
             <div className="relative hidden sm:block" ref={langDropdownRef}>
               <button 
@@ -201,10 +193,7 @@ const Header = memo(() => {
           </div>
 
           <div className="flex flex-col p-5 gap-4 overflow-y-auto flex-grow">
-            <div className="relative w-full mb-4">
-              <Input type="text" placeholder={t('header.searchPlaceholder')} className="w-full pl-[16px] pr-[40px] py-[8px] text-[13px] rounded-md border border-zinc-200 bg-zinc-50 dark:bg-zinc-800" />
-              <Search className="absolute top-1/2 right-[12px] -translate-y-1/2 w-4 h-4 text-zinc-600" />
-            </div>
+            <SearchAutocomplete isMobile onCloseMobile={() => setIsOpen(false)} />
 
             <NavLink to="/" onClick={() => setIsOpen(false)} className={mobileLinkStyles}>{t('header.home')}</NavLink>
             <NavLink to="/contact" onClick={() => setIsOpen(false)} className={mobileLinkStyles}>{t('header.contact')}</NavLink>
