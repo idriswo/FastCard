@@ -17,7 +17,7 @@ const Homepage = () => {
     <div className="w-full max-w-[1400px] mx-auto px-[16px] md:px-[32px] font-sans overflow-x-hidden">
 
       <div className="flex flex-col md:flex-row gap-[40px] mb-[60px]">
-        <div data-aos="fade-right" data-aos-duration="800">
+        <div data-aos="fade-right" data-aos-duration="800" className="relative z-40">
           <CategorySidebar
             selectedId={selectedCategoryId}
             onSelectCategory={(id) => setSelectedCategoryId(id)}

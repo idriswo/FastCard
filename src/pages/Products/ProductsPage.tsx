@@ -35,6 +35,8 @@ const ProductsPage = memo(() => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const initialCategoryId = searchParams.get('categoryId');
+  const initialSubCategoryId = searchParams.get('subCategoryId');
+  const initialBrandId = searchParams.get('brandId');
 
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
@@ -59,7 +61,12 @@ const ProductsPage = memo(() => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(
     initialCategoryId ? Number(initialCategoryId) : null
   );
-  const [selectedBrands, setSelectedBrands] = useState<number[]>([]);
+  const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(
+    initialSubCategoryId ? Number(initialSubCategoryId) : null
+  );
+  const [selectedBrands, setSelectedBrands] = useState<number[]>(
+    initialBrandId ? [Number(initialBrandId)] : []
+  );
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const [minPrice, setMinPrice] = useState<string>('');
   const [maxPrice, setMaxPrice] = useState<string>('');
@@ -85,6 +92,7 @@ const ProductsPage = memo(() => {
         let productUrl = '/Product/get-products';
         const params = new URLSearchParams();
         if (selectedCategory) params.append('CategoryId', selectedCategory.toString());
+        if (selectedSubCategory) params.append('SubCategoryId', selectedSubCategory.toString());
         // For brands, if API doesn't support multiple, we do it client side
 
         if (params.toString()) {
@@ -103,10 +111,25 @@ const ProductsPage = memo(() => {
     };
 
     fetchData();
-  }, [selectedCategory]);
+  }, [selectedCategory, selectedSubCategory]);
+
+  // Sync state when URL params change
+  useEffect(() => {
+    const cid = searchParams.get('categoryId');
+    const scid = searchParams.get('subCategoryId');
+    const bid = searchParams.get('brandId');
+    if (cid) setSelectedCategory(Number(cid));
+    else setSelectedCategory(null);
+    if (scid) setSelectedSubCategory(Number(scid));
+    else setSelectedSubCategory(null);
+    if (bid && !selectedBrands.includes(Number(bid))) setSelectedBrands(prev => [...prev, Number(bid)]);
+  }, [searchParams]);
 
   const filteredProducts = products.filter(product => {
     if (selectedBrands.length > 0 && !selectedBrands.includes(product.brandId)) return false;
+    
+    // Fallback: If backend ignored SubCategoryId, filter locally
+    if (selectedSubCategory && (product as any).subCategoryId && (product as any).subCategoryId !== selectedSubCategory) return false;
 
     if (minPrice && product.price < Number(minPrice)) return false;
     if (maxPrice && product.price > Number(maxPrice)) return false;
