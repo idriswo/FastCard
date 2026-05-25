@@ -75,7 +75,7 @@ const SignUp = memo(() => {
             <input
               type="text"
               name="name"
-              placeholder={t('auth.username', 'Name')}
+              placeholder={t('auth.username', 'Username')}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
