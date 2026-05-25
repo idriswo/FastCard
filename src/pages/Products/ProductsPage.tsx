@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, ChevronUp, Heart } from 'lucide-react';
 import { axiosRequest } from '../../utils/token';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,9 +37,10 @@ const ProductsPage = memo(() => {
   const initialCategoryId = searchParams.get('categoryId');
   const initialSubCategoryId = searchParams.get('subCategoryId');
   const initialBrandId = searchParams.get('brandId');
-
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const navigate = useNavigate();
 
   const handleWishlist = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
@@ -48,6 +49,10 @@ const ProductsPage = memo(() => {
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
     dispatch(addToCart(product));
   };
 
