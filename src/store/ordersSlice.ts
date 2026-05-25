@@ -1,4 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { loginSuccess, logout } from './authSlice';
+import { jwtDecode } from 'jwt-decode';
+import { getToken } from '../utils/token';
 
 export interface OrderItem {
   id: string | number;
@@ -31,9 +34,21 @@ interface OrdersState {
   orders: Order[];
 }
 
-const loadOrders = (): Order[] => {
+const getUserId = (customToken?: string) => {
+  const token = customToken || getToken();
+  if (token) {
+    try {
+      const decoded: any = jwtDecode(token);
+      return decoded.sid || decoded.id || decoded.userName || 'anonymous';
+    } catch(e) {}
+  }
+  return 'anonymous';
+};
+
+const loadOrders = (customToken?: string): Order[] => {
   try {
-    const data = localStorage.getItem('ordersState');
+    const userId = getUserId(customToken);
+    const data = localStorage.getItem(`ordersState_${userId}`);
     return data ? JSON.parse(data) : [];
   } catch {
     return [];
@@ -42,7 +57,8 @@ const loadOrders = (): Order[] => {
 
 const saveOrders = (orders: Order[]) => {
   try {
-    localStorage.setItem('ordersState', JSON.stringify(orders));
+    const userId = getUserId();
+    localStorage.setItem(`ordersState_${userId}`, JSON.stringify(orders));
   } catch (err) {
     console.error('Could not save orders', err);
   }
@@ -74,6 +90,14 @@ const ordersSlice = createSlice({
       }
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(loginSuccess, (state, action) => {
+      state.orders = loadOrders(action.payload);
+    });
+    builder.addCase(logout, (state) => {
+      state.orders = [];
+    });
+  }
 });
 
 export const { placeOrder, cancelOrder } = ordersSlice.actions;
