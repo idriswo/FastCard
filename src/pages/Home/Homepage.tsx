@@ -8,7 +8,7 @@ import PromoBanner from "./PromoBanner/PromoBanner";
 import ExploreProducts from "./ExploreProducts/ExploreProducts";
 import NewArrival from "./NewArrival/NewArrival";
 import Services from "./Services/Services";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";   
 
 const Homepage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);

@@ -5,8 +5,35 @@
     "about": "О нас",
     "signup": "Регистрация",
     "searchPlaceholder": "Что вы ищете?",
-    "manageAccount": "Мой аккаунт",
-    "logout": "Выйти"
+    "manageAccount": "Управление аккаунтом",
+    "logout": "Выйти",
+    "category": "Категория",
+    "brands": "Бренды",
+    "features": "Особенности",
+    "price": "Цена",
+    "condition": "Состояние",
+    "ratings": "Оценки"
+  },
+  "common": {
+    "apply": "Применить"
+  },
+  "features": {
+    "Metallic": "Металлик",
+    "Plasticcover": "Пластиковый корпус",
+    "8GBRam": "8ГБ ОЗУ",
+    "Superpower": "Супер мощность",
+    "LargeMemory": "Большая память"
+  },
+  "condition": {
+    "Any": "Любое",
+    "Refurbished": "Восстановленное",
+    "Brandnew": "Совершенно новое",
+    "Olditems": "Старые вещи"
+  },
+  "sort": {
+    "popularity": "По популярности",
+    "priceLowToHigh": "Цена (по возрастанию)",
+    "priceHighToLow": "Цена (по убыванию)"
   },
   "home": {
     "categories": "Категории",
@@ -46,8 +73,12 @@
     "delivery": "Бесплатная доставка",
     "deliveryDesc": "Введите почтовый индекс для проверки",
     "return": "Возврат товара",
-    "returnDesc": "Бесплатный возврат в течение 30 дней. Подробнее",
-    "related": "Похожие товары"
+    "returnDesc": "Бесплатный возврат в течение 30 дней. Подробности",
+    "related": "Похожие товары",
+    "min": "Мин",
+    "max": "Макс",
+    "noProducts": "По вашему запросу товары не найдены.",
+    "moreProducts": "Больше товаров"
   },
   "cart": {
     "title": "Корзина",
@@ -83,6 +114,14 @@
     "placeOrder": "Разместить заказ"
   },
   "auth": {
+    "loginTitle": "Войти в FastCard",
+    "loginSubtitle": "Введите ваши данные ниже",
+    "loginBtn": "Войти",
+    "noAccount": "У вас нет аккаунта?",
+    "signupBtn": "Регистрация",
+    "signupTitle": "Создать аккаунт",
+    "signupSubtitle": "Введите ваши данные ниже",
+    "signupGoogle": "Зарегистрироваться через Google",
     "createAccount": "Создать аккаунт",
     "enterDetails": "Введите свои данные ниже",
     "name": "Имя",

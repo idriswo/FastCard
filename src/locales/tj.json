@@ -5,8 +5,35 @@
     "about": "Дар бораи мо",
     "signup": "Ба қайд гирифтан",
     "searchPlaceholder": "Шумо чӣ меҷӯед?",
-    "manageAccount": "Профили ман",
-    "logout": "Баромад"
+    "manageAccount": "Идораи ҳисоб",
+    "logout": "Баромад",
+    "category": "Категория",
+    "brands": "Брендҳо",
+    "features": "Хусусиятҳо",
+    "price": "Нарх",
+    "condition": "Ҳолат",
+    "ratings": "Баҳоҳо"
+  },
+  "common": {
+    "apply": "Татбиқ кардан"
+  },
+  "features": {
+    "Metallic": "Металлӣ",
+    "Plasticcover": "Пластикӣ",
+    "8GBRam": "8ГБ RAM",
+    "Superpower": "Қувваи баланд",
+    "LargeMemory": "Хотираи калон"
+  },
+  "condition": {
+    "Any": "Ҳаргуна",
+    "Refurbished": "Барқароршуда",
+    "Brandnew": "Комилан нав",
+    "Olditems": "Чизҳои кӯҳна"
+  },
+  "sort": {
+    "popularity": "Аз рӯи маъруфият",
+    "priceLowToHigh": "Нарх (арзон ба қиммат)",
+    "priceHighToLow": "Нарх (қиммат ба арзон)"
   },
   "home": {
     "categories": "Категорияҳо",
@@ -46,8 +73,12 @@
     "delivery": "Интиқоли ройгон",
     "deliveryDesc": "Индекси почтаи худро воред кунед",
     "return": "Бозгардонидани мол",
-    "returnDesc": "Бозгардонидани ройгон дар давоми 30 рӯз. Муфассал",
-    "related": "Маҳсулоти монанд"
+    "returnDesc": "Бозгашти ройгон дар давоми 30 рӯз. Тафсилот",
+    "related": "Молҳои монанд",
+    "min": "Мин",
+    "max": "Макс",
+    "noProducts": "Мувофиқи дархости шумо ягон мол ёфт нашуд.",
+    "moreProducts": "Маҳсулоти бештар"
   },
   "cart": {
     "title": "Сабад",
@@ -83,6 +114,14 @@
     "placeOrder": "Фармоиш додан"
   },
   "auth": {
+    "loginTitle": "Ба FastCard ворид шавед",
+    "loginSubtitle": "Маълумоти худро дар поён ворид кунед",
+    "loginBtn": "Вуруд",
+    "noAccount": "Шумо ҳисоб ندارед?",
+    "signupBtn": "Ба қайд гирифтан",
+    "signupTitle": "Ҳисоб созед",
+    "signupSubtitle": "Маълумоти худро дар поён ворид кунед",
+    "signupGoogle": "Тавассути Google сабти ном кунед",
     "createAccount": "Сохтани аккаунт",
     "enterDetails": "Маълумоти худро ворид кунед",
     "name": "Ном",

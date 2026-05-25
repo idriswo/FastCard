@@ -281,7 +281,7 @@ const ProductsPage = memo(() => {
               className="flex items-center justify-between font-semibold text-[16px] cursor-pointer"
               onClick={() => toggleSection('features')}
             >
-              <span>Features</span>
+              <span>{t('header.features', 'Features')}</span>
               {openSections.features ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </div>
             {openSections.features && (
@@ -294,10 +294,10 @@ const ProductsPage = memo(() => {
                       onChange={() => toggleFeature(f)}
                       className="w-[18px] h-[18px] border-gray-300 dark:border-zinc-700 rounded-[4px] accent-black cursor-pointer"
                     />
-                    <span className="text-gray-600 dark:text-zinc-300 group-hover:text-black dark:hover:text-white dark:text-white">{f}</span>
+                    <span className="text-gray-600 dark:text-zinc-300 group-hover:text-black dark:hover:text-white dark:text-white">{t(`features.${f.replace(' ', '')}`, f)}</span>
                   </label>
                 ))}
-                <span className="text-[#DB4444] cursor-pointer hover:underline text-[14px]">See all</span>
+                <span className="text-[#DB4444] cursor-pointer hover:underline text-[14px]">{t('home.viewAll')}</span>
               </div>
             )}
           </div>
@@ -321,7 +321,7 @@ const ProductsPage = memo(() => {
                 </div>
                 <div className="flex items-center gap-[12px]">
                   <div className="flex-1">
-                    <label className="text-[12px] text-gray-500 dark:text-zinc-400 mb-1 block">Min</label>
+                    <label className="text-[12px] text-gray-500 dark:text-zinc-400 mb-1 block">{t('product.min', 'Min')}</label>
                     <input
                       type="number"
                       placeholder="0"
@@ -331,7 +331,7 @@ const ProductsPage = memo(() => {
                     />
                   </div>
                   <div className="flex-1">
-                    <label className="text-[12px] text-gray-500 dark:text-zinc-400 mb-1 block">Max</label>
+                    <label className="text-[12px] text-gray-500 dark:text-zinc-400 mb-1 block">{t('product.max', 'Max')}</label>
                     <input
                       type="number"
                       placeholder="999999"
@@ -342,7 +342,7 @@ const ProductsPage = memo(() => {
                   </div>
                 </div>
                 <button className="w-full py-[10px] border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-zinc-200 font-medium rounded-[4px] hover:border-[#DB4444] hover:text-[#DB4444] transition-colors mt-2">
-                  Apply
+                  {t('common.apply', 'Apply')}
                 </button>
               </div>
             )}
@@ -356,7 +356,7 @@ const ProductsPage = memo(() => {
               className="flex items-center justify-between font-semibold text-[16px] cursor-pointer"
               onClick={() => toggleSection('condition')}
             >
-              <span>Condition</span>
+              <span>{t('header.condition', 'Condition')}</span>
               {openSections.condition ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </div>
             {openSections.condition && (
@@ -370,7 +370,7 @@ const ProductsPage = memo(() => {
                       onChange={() => setCondition(cond)}
                       className="w-[18px] h-[18px] border-gray-300 dark:border-zinc-700 accent-[#DB4444] cursor-pointer"
                     />
-                    <span className="text-gray-600 dark:text-zinc-300 group-hover:text-black dark:hover:text-white dark:text-white">{cond}</span>
+                    <span className="text-gray-600 dark:text-zinc-300 group-hover:text-black dark:hover:text-white dark:text-white">{t(`condition.${cond.replace(' ', '')}`, cond)}</span>
                   </label>
                 ))}
               </div>
@@ -385,7 +385,7 @@ const ProductsPage = memo(() => {
               className="flex items-center justify-between font-semibold text-[16px] cursor-pointer"
               onClick={() => toggleSection('ratings')}
             >
-              <span>Ratings</span>
+              <span>{t('header.ratings', 'Ratings')}</span>
               {openSections.ratings ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </div>
             {openSections.ratings && (
@@ -420,9 +420,9 @@ const ProductsPage = memo(() => {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="appearance-none border border-gray-200 dark:border-zinc-700 rounded-[4px] px-[16px] py-[8px] pr-[40px] text-[14px] text-gray-700 dark:text-zinc-200 bg-white dark:bg-zinc-900 focus:outline-none focus:border-black dark:border-zinc-700 cursor-pointer"
               >
-                <option value="Popularity">Popularity</option>
-                <option value="Price (Low to High)">Price (Low to High)</option>
-                <option value="Price (High to Low)">Price (High to Low)</option>
+                <option value="Popularity">{t('sort.popularity', 'Popularity')}</option>
+                <option value="Price (Low to High)">{t('sort.priceLowToHigh', 'Price (Low to High)')}</option>
+                <option value="Price (High to Low)">{t('sort.priceHighToLow', 'Price (High to Low)')}</option>
               </select>
               <ChevronDown size={16} className="absolute right-[12px] top-1/2 -translate-y-1/2 text-gray-500 dark:text-zinc-400 pointer-events-none" />
             </div>
@@ -434,7 +434,7 @@ const ProductsPage = memo(() => {
             </div>
           ) : sortedProducts.length === 0 ? (
             <div className="w-full py-20 flex justify-center text-gray-500 dark:text-zinc-400">
-              No products found matching the criteria.
+              {t('product.noProducts', 'No products found matching the criteria.')}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-[40px] gap-x-[30px]">
@@ -464,11 +464,6 @@ const ProductsPage = memo(() => {
                       ) : null}
 
                       <div className="absolute top-[12px] right-[12px] flex flex-col gap-[8px] z-10">
-                        <button className="w-[34px] h-[34px] bg-white dark:bg-zinc-900 rounded-full flex items-center justify-center shadow-sm text-gray-700 dark:text-zinc-200 hover:bg-red-500 hover:text-white transition-colors duration-200">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                          </svg>
-                        </button>
                         <button 
                           onClick={(e) => handleWishlist(e, product)}
                           className={`w-[34px] h-[34px] bg-white dark:bg-zinc-900 rounded-full flex items-center justify-center shadow-sm transition-colors duration-200 
@@ -547,7 +542,7 @@ const ProductsPage = memo(() => {
           {!loading && sortedProducts.length > 0 && (
             <div className="flex justify-center mt-[60px]">
               <button className="bg-[#DB4444] text-white font-medium px-[48px] py-[16px] rounded-[4px] hover:bg-red-600 transition-colors">
-                More Products
+                {t('product.moreProducts', 'More Products')}
               </button>
             </div>
           )}

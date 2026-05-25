@@ -6,7 +6,34 @@
     "signup": "Sign Up",
     "searchPlaceholder": "What are you looking for?",
     "manageAccount": "Manage My Account",
-    "logout": "Logout"
+    "logout": "Logout",
+    "category": "Category",
+    "brands": "Brands",
+    "features": "Features",
+    "price": "Price",
+    "condition": "Condition",
+    "ratings": "Ratings"
+  },
+  "common": {
+    "apply": "Apply"
+  },
+  "features": {
+    "Metallic": "Metallic",
+    "Plasticcover": "Plastic cover",
+    "8GBRam": "8GB Ram",
+    "Superpower": "Super power",
+    "LargeMemory": "Large Memory"
+  },
+  "condition": {
+    "Any": "Any",
+    "Refurbished": "Refurbished",
+    "Brandnew": "Brand new",
+    "Olditems": "Old items"
+  },
+  "sort": {
+    "popularity": "Popularity",
+    "priceLowToHigh": "Price (Low to High)",
+    "priceHighToLow": "Price (High to Low)"
   },
   "home": {
     "categories": "Categories",
@@ -47,7 +74,11 @@
     "deliveryDesc": "Enter your postal code for Delivery Availability",
     "return": "Return Delivery",
     "returnDesc": "Free 30 Days Delivery Returns. Details",
-    "related": "Related Item"
+    "related": "Related Item",
+    "min": "Min",
+    "max": "Max",
+    "noProducts": "No products found matching the criteria.",
+    "moreProducts": "More Products"
   },
   "cart": {
     "title": "Cart",
@@ -83,6 +114,14 @@
     "placeOrder": "Place Order"
   },
   "auth": {
+    "loginTitle": "Log in to FastCard",
+    "loginSubtitle": "Enter your details below",
+    "loginBtn": "Log in",
+    "noAccount": "Don't have an account?",
+    "signupBtn": "Sign Up",
+    "signupTitle": "Create an account",
+    "signupSubtitle": "Enter your details below",
+    "signupGoogle": "Sign up with Google",
     "createAccount": "Create an account",
     "enterDetails": "Enter your details below",
     "name": "Name",
