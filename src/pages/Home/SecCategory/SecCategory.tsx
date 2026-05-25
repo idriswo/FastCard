@@ -1,13 +1,12 @@
 import { useEffect, useState, memo } from "react";
 import { useTranslation } from 'react-i18next';
 import svg from '../../../assets/dc40ba897215f42e5883a64157f0aa3a4d1a866a.jpg'
-
 const SLIDES = [
   {
     id: 1,
     title: "iPhone 14 Series",
     discount: "Up to 10% off Voucher",
-    svg:svg,
+    svg: svg,
     linkText: "Shop Now",
     imgBg: "from-purple-900 to-indigo-950", 
     mockImgText: "📱 iPhone 14 Pro"
@@ -17,8 +16,7 @@ const SLIDES = [
     title: "Samsung S24 Ultra",
     discount: "New Era of Galaxy AI",
     linkText: "Explore Now",
-    url: "https://www.samsung.com/global/galaxy/galaxy-s24-ultra/",
-    svg: svg,
+    svg: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=600&auto=format&fit=crop",
     imgBg: "from-zinc-800 to-zinc-950",
     mockImgText: "✨ Galaxy S24"
   },
@@ -27,8 +25,7 @@ const SLIDES = [
     title: "MacBook Pro M3",
     discount: "Mind-blowing Performance",
     linkText: "Buy MacBook",
-    url: "https://www.apple.com/macbook-pro/",
-    svg: svg,
+    svg: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=600&auto=format&fit=crop",
     imgBg: "from-slate-800 to-slate-950",
     mockImgText: "💻 MacBook M3"
   },
@@ -37,8 +34,7 @@ const SLIDES = [
     title: "Sony WH-1000XM5",
     discount: "Your World. Nothing Else.",
     linkText: "Shop Audio",
-    url: "https://electronics.sony.com/audio/headphones/headband/p/wh1000xm5-b",
-    svg: svg,
+    svg:  "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=600&auto=format&fit=crop",
     imgBg: "from-neutral-800 to-neutral-950",
     mockImgText: "🎧 Sony XM5"
   },
@@ -47,8 +43,7 @@ const SLIDES = [
     title: "Apple Watch Ultra 2",
     discount: "Adventure Awaits Again",
     linkText: "Discover More",
-    url: "https://www.apple.com/apple-watch-ultra-2/",
-    svg: svg,
+    svg: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?q=80&w=600&auto=format&fit=crop",
     imgBg: "from-amber-950 to-stone-950",
     mockImgText: "⌚ Watch Ultra"
   }
@@ -106,7 +101,11 @@ const SecCategory = memo(() => {
             </div>
 
             <div className="flex-1 w-full flex items-center justify-center mt-6 md:mt-0 relative h-[180px] md:h-full">
-               <img src={slide.svg} alt="" />
+              <img
+                src={slide.svg}
+                alt={slide.title}
+                className="w-full max-w-[200px] md:max-w-[300px] aspect-square object-cover rounded-2xl drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+              />
             </div>
           </div>
         );
