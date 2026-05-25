@@ -1,4 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { loginSuccess, logout } from './authSlice';
+import { jwtDecode } from 'jwt-decode';
+import { getToken } from '../utils/token';
 
 export interface CartItem {
   id: string | number;
@@ -17,9 +20,21 @@ interface CartState {
   items: CartItem[];
 }
 
-const loadState = (): CartItem[] => {
+const getUserId = (customToken?: string) => {
+  const token = customToken || getToken();
+  if (token) {
+    try {
+      const decoded: any = jwtDecode(token);
+      return decoded.sid || decoded.id || decoded.userName || 'anonymous';
+    } catch(e) {}
+  }
+  return 'anonymous';
+};
+
+const loadState = (customToken?: string): CartItem[] => {
   try {
-    const serializedState = localStorage.getItem('cartState');
+    const userId = getUserId(customToken);
+    const serializedState = localStorage.getItem(`cartState_${userId}`);
     if (serializedState === null) {
       return [];
     }
@@ -31,8 +46,9 @@ const loadState = (): CartItem[] => {
 
 const saveState = (state: CartItem[]) => {
   try {
+    const userId = getUserId();
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('cartState', serializedState);
+    localStorage.setItem(`cartState_${userId}`, serializedState);
   } catch (err) {
     console.error("Could not save state", err);
   }
@@ -83,6 +99,14 @@ const cartSlice = createSlice({
       saveState(state.items);
     }
   },
+  extraReducers: (builder) => {
+    builder.addCase(loginSuccess, (state, action) => {
+      state.items = loadState(action.payload);
+    });
+    builder.addCase(logout, (state) => {
+      state.items = [];
+    });
+  }
 });
 
 export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;

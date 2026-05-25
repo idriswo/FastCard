@@ -1,4 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { loginSuccess, logout } from './authSlice';
+import { jwtDecode } from 'jwt-decode';
+import { getToken } from '../utils/token';
 
 export interface WishlistProduct {
   id: number | string;
@@ -18,9 +21,21 @@ interface WishlistState {
   items: WishlistProduct[];
 }
 
-const loadState = (): WishlistState => {
+const getUserId = (customToken?: string) => {
+  const token = customToken || getToken();
+  if (token) {
+    try {
+      const decoded: any = jwtDecode(token);
+      return decoded.sid || decoded.id || decoded.userName || 'anonymous';
+    } catch(e) {}
+  }
+  return 'anonymous';
+};
+
+const loadState = (customToken?: string): WishlistState => {
   try {
-    const serializedState = localStorage.getItem('wishlistState');
+    const userId = getUserId(customToken);
+    const serializedState = localStorage.getItem(`wishlistState_${userId}`);
     if (serializedState === null) {
       return { items: [] };
     }
@@ -43,13 +58,23 @@ export const wishlistSlice = createSlice({
       } else {
         state.items.push(action.payload);
       }
-      localStorage.setItem('wishlistState', JSON.stringify(state));
+      const userId = getUserId();
+      localStorage.setItem(`wishlistState_${userId}`, JSON.stringify(state));
     },
     clearWishlist: (state) => {
       state.items = [];
-      localStorage.removeItem('wishlistState');
+      const userId = getUserId();
+      localStorage.removeItem(`wishlistState_${userId}`);
     }
   },
+  extraReducers: (builder) => {
+    builder.addCase(loginSuccess, (state, action) => {
+      state.items = loadState(action.payload).items;
+    });
+    builder.addCase(logout, (state) => {
+      state.items = [];
+    });
+  }
 });
 
 export const { toggleWishlist, clearWishlist } = wishlistSlice.actions;

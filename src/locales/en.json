@@ -139,6 +139,7 @@
     "usernameRequired": "Username is required",
     "invalidEmail": "Invalid email address",
     "emailRequired": "Email is required",
+    "pleaseLogin": "Please log in first!",
     "phoneNumbersOnly": "Phone number must contain only digits",
     "phoneMin": "Phone number must be at least 7 digits",
     "phoneMax": "Phone number must not exceed 15 digits",
